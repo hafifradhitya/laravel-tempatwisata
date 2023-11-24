@@ -11,9 +11,23 @@ use Illuminate\Pagination\Paginator;
 
 class DestinationsController extends Controller
 {
-    public function index():View
+    public function index(Request $request):View
     {
-        $destinations = Destinations::latest()->paginate(5);
+        $search = $request->search;
+
+        if(!empty($search)){
+            $destinations = Destinations::latest()->where('name','like', "%$search%")->paginate(5);
+            $destinations = Destinations::latest()->where('location','like', "%$search%")->paginate(5);
+            $destinations = Destinations::latest()->where('details','like', "%$search%")->paginate(5);
+            $destinations = Destinations::latest()->where('day_open','like', "%$search%")->paginate(5);
+            $destinations = Destinations::latest()->where('time_open','like', "%$search%")->paginate(5);
+            $destinations = Destinations::latest()->where('pricing','like', "%$search%")->paginate(5);
+            
+        }else{
+            $destinations = Destinations::latest()->paginate(5); 
+        }
+
+        
         return view('destinations.index', compact('destinations'));
     }
 
@@ -25,7 +39,6 @@ class DestinationsController extends Controller
     public function store(Request $request):RedirectResponse
     {
         $this->validate($request, [
-            'id' => 'required',
             'name' => 'required',
             'location' => 'required',
             'details' => 'required',
@@ -35,7 +48,6 @@ class DestinationsController extends Controller
         ]);
 
         Destinations::create([
-            'id' => $request->id,
             'name' => $request->name,
             'location' => $request->location,
             'details' => $request->details,
@@ -43,17 +55,20 @@ class DestinationsController extends Controller
             'time_open' => $request->time_open,
             'pricing' => $request->pricing
         ]);
+
+        session()->flash("pesan", "Data Berhasil ditambah");
+        return redirect()->route('destinations.index')->with(['success'=>'Data berhasil ditambah']);
     }
 
     public function show(string $id):View
     {
-        $Destinations = Destinations::findOrFail($id);
-        return view('destination.show', compact('destinations'));
+        $destinations = Destinations::findOrFail($id);
+        return view('destinations.show', compact('destinations'));
     }
 
     public function edit(string $id):View
     {
-        $Destinations = Destinations::findOrFail($id);
+        $destinations = Destinations::findOrFail($id);
         return view('destinations.edit', compact('destinations'));
     }
 
@@ -62,7 +77,6 @@ class DestinationsController extends Controller
     public function update(Request $request, string $id):RedirectResponse
     {
         $this->validate($request, [
-            'id' => 'required',
             'name' => 'required',
             'location' => 'required',
             'details' => 'required',
@@ -71,8 +85,9 @@ class DestinationsController extends Controller
             'pricing' => 'required'
         ]);
 
-        Destinations::update([
-            'id' => $request->id,
+        $destinations = Destinations::findOrFail($id);
+
+        $destinations->update([
             'name' => $request->name,
             'location' => $request->location,
             'details' => $request->details,
@@ -80,14 +95,16 @@ class DestinationsController extends Controller
             'time_open' => $request->time_open,
             'pricing' => $request->pricing
         ]);
+
+        session()->flash("pesan", "Data berhasil diedit");
+        return redirect()->route('destinations.index')->with(['success'=>'Data berhasil diedit']);
     }
 
     public function destroy(string $id):RedirectResponse
     {
         $destinations = Destinations::findOrFail($id);
         
-        $destination->delete();
-
+        $destinations->delete();
         session()->flash("pesan", "Data berhasil dihapus");
         return redirect()->route('destinations.index')->with(['success'=>'Data berhasil dihapus']);
     }

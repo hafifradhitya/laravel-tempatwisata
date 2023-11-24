@@ -1,0 +1,71 @@
+.header-jumbotron {
+    min-height: 660px;
+    background-image: url(../Gunung-bromo.jpg);
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h1,
+h2,
+.fw-blod {
+    font-weight: 700;
+    color: black;
+}
+
+h3,
+h4,
+.fw-semi-bold {
+    font-weight: 600 ;
+}
+
+h5,
+h6,
+.fw-medium {
+    font-weight: 500 ;
+}
+strong{
+    color: black ;
+    overflow: hidden;
+}
+.heading_container.heading_center{
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  text-align: center;
+}
+.heading_container{
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    position: relative;
+    margin-right: 25px;
+    padding: 10px 0;
+    font-family: 'Jost', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    color: black;
+    outline: none;
+    transition: .5s;
+}
+.navbar-light .navbar-brand{
+    color: black;
+    font-size: 30px;
+}
+.bg-dark{
+    background-color: black !important;
+}
