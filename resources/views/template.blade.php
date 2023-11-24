@@ -112,9 +112,6 @@
                         <li>
                             <a href="{{ url('/wisata') }}" class="nav-link">Wisata</a>
                         </li>
-                        <li>
-                            <a href="{{  url('profile')  }}" class="nav-link">Profile</a>
-                        </li>
                     </ul>
 
                     <ul class="navbar-nav ml-auto">
