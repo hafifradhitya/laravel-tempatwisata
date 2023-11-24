@@ -17,10 +17,10 @@ class DestinationsController extends Controller
 
         if(!empty($search)){
             $destinations = Destinations::latest()->where('name','like', "%$search%")->paginate(5);
-            $destinations = Destinations::latest()->where('location','like', "%$search%")->paginate(5);
-            $destinations = Destinations::latest()->where('details','like', "%$search%")->paginate(5);
-            $destinations = Destinations::latest()->where('day_open','like', "%$search%")->paginate(5);
-            $destinations = Destinations::latest()->where('time_open','like', "%$search%")->paginate(5);
+            // $destinations = Destinations::latest()->where('location','like', "%$search%")->paginate(5);
+            // $destinations = Destinations::latest()->where('details','like', "%$search%")->paginate(5);
+            // $destinations = Destinations::latest()->where('day_open','like', "%$search%")->paginate(5);
+            // $destinations = Destinations::latest()->where('time_open','like', "%$search%")->paginate(5);
             $destinations = Destinations::latest()->where('pricing','like', "%$search%")->paginate(5);
             
         }else{
